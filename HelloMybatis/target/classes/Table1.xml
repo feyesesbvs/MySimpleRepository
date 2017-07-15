@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Table1">
+
+    <select id="findTable1ById" parameterType="Long" resultType="com.jnshu.pojo.Table1" >
+        select * from table2 where id = #{id}
+    </select>
+
+    <select id="findTable1ByName" parameterType="String" resultType="com.jnshu.pojo.Table1">
+           SELECT  * FROM  table2 where name = #{name}
+    </select>
+
+    <select id="findTable1ByOnlineId" parameterType="String" resultType="com.jnshu.pojo.Table1">
+        SELECT  * FROM  table2 where online_id = #{online_id}
+    </select>
+
+
+
+    <insert id="addTable1" parameterType="com.jnshu.pojo.Table1"  >
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+        select last_insert_id()
+        </selectKey>
+             INSERT INTO table2( `name`, `qq`, `jobs`, `join_time`, `school`, `online_id`, `data_url`, `declaration`, `teacher`, `sources`) VALUES (#{name}, #{qq}, #{jobs}, #{join_time}, #{school}, #{online_id}, #{data_url}, #{declaration}, #{teacher}, #{sources})
+    </insert>
+
+    <delete id="deleteTable1" parameterType="Long"  >
+        delete from table2 where id = #{id}
+    </delete>
+
+
+    <update id="updateTable1" parameterType="com.jnshu.pojo.Table1">
+        UPDATE  table2 set name=#{name}, qq=#{qq}, jobs=#{jobs}, join_time=#{join_time}, school=#{school}, online_id=#{online_id}, data_url=#{data_url}, declaration=#{declaration}, teacher=#{teacher}, sources=#{sources} where id=#{id}
+    </update>
+
+
+
+
+
+
+
+
+
+    </mapper>
