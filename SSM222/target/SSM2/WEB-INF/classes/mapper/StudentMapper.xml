@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.dao.StudentDao">
+      <!--namespace对应dao接口地址，type对应实体类 ，否则报错-->
+    <resultMap id="defuaresultMap" type="com.jnshu.pojo.Student">
+        <id column="id" property="id"></id>
+        <result column="update_at" property="update_at"></result>
+        <result column="create_at" property="create_at"></result>
+        <result column="name" property="name"></result>
+        <result column="qq" property="qq"></result>
+        <result column="jobs" property="jobs"></result>
+        <result column="join_time" property="join_time"></result>
+        <result column="school" property="school"></result>
+        <result column="online_id" property="online_id"></result>
+        <result column="data_url" property="data_url"></result>
+        <result column="declaration" property="declaration"></result>
+        <result column="teacher" property="teacher"></result>
+        <result column="sources" property="sources"></result>
+    </resultMap>
+
+    <select id="getAllStudent" resultMap="defuaresultMap">
+        SELECT id,update_at,create_at,name,qq,jobs,join_time,school,online_id,data_url,declaration,teacher,sources
+        FROM table1
+    </select>
+
+    <select id="findById" resultMap="defuaresultMap" parameterType="long">
+        SELECT * FROM table1 WHERE id=#{id}
+    </select>
+
+    <select id="findByName" resultMap="defuaresultMap" parameterType="com.jnshu.pojo.Student">
+          SELECT * FROM table1 WHERE name = #{name}
+    </select>
+
+    <delete id="deleteById" parameterType="long">
+        DELETE FROM table1 WHERE id=#{id}
+    </delete>
+
+    <insert id="addStudent" parameterType="com.jnshu.pojo.Student">
+         INSERT INTO table1 (
+      name, qq, jobs, join_time,
+      school, online_id, data_url,
+      declaration, teacher, sources
+      )
+    values (#{name}, #{qq}, #{jobs}, #{join_time},
+      #{school}, #{online_id}, #{data_url},
+      #{declaration}, #{teacher}, #{sources}
+      )
+    </insert>
+
+    <update id="update" parameterType="com.jnshu.pojo.Student">
+        update table1
+    set name = #{name},
+      qq = #{qq},
+      jobs = #{jobs},
+      join_time = #{join_time},
+      school = #{school},
+      online_id = #{online_id},
+      data_url = #{data_url},
+      declaration = #{declaration},
+      teacher = #{teacher},
+      sources = #{sources} WHERE id = #{id}
+    </update>
+
+</mapper>
